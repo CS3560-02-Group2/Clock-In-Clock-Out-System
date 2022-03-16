@@ -1,0 +1,27 @@
+//Obj Oriented Design Group Project 2022
+//Manager tools window
+
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class ManagerToolsWindow{
+
+    private static void createAndShowGUI(){
+        //Gui stuff here
+        //list of employee names, can be selected which will update a second list to show thier hours
+        //add employee button, brings popup with an input name field and will display the employee id number 
+        //when created
+        //edit employee button, brings up popup where you can select a check box to set employee as active/inactive
+        //also has checkbox to make manager or not
+
+    }
+    public static void main(String[] args){
+        SwingUtilities.invokeLater(new Runnable(){
+            public void run(){
+               createAndShowGUI();
+            }
+         });
+    }
+}
