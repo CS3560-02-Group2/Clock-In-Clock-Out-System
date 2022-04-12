@@ -1,3 +1,4 @@
+
 //Obj Oriented Design Group Project 2022
 //Main starting window for the clock in clock out program
 
@@ -64,7 +65,7 @@ public class TimeClockMain{
         jmiOpenManagerWindow.setEnabled(false);
         jmiOpenManagerWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                ManagerWindow.createAndShowGUI();
+                ManagerToolsWindow.createAndShowGUI();
             }
         });
 
