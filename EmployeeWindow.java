@@ -13,7 +13,11 @@ public class EmployeeWindow{
         //clock in/ out button
         //break start/end button
         //should close after showing confirmation of button press
-
+        setTitle("Welcome");
+        setSize(500,600);
+        setMinimumSize(new Dimension(300,400));
+        setDefaultCloseOperation(WindowConstrants.EXIT_ON_CLOSE);
+        setVisible(true);
     }
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable(){
