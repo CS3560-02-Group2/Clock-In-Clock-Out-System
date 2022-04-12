@@ -6,22 +6,22 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ManagerToolsWindow{
+public class ManagerWindow{
 
-    private static void createAndShowGUI(){
-        //Gui stuff here
-        //list of employee names, can be selected which will update a second list to show thier hours
-        //add employee button, brings popup with an input name field and will display the employee id number 
-        //when created
-        //edit employee button, brings up popup where you can select a check box to set employee as active/inactive
-        //also has checkbox to make manager or not
+    static void createAndShowGUI(){
+        JFrame frame = new JFrame("Manager Tools");
 
-    }
-    public static void main(String[] args){
-        SwingUtilities.invokeLater(new Runnable(){
-            public void run(){
-               createAndShowGUI();
-            }
-         });
+        JPanel panel = new JPanel();
+
+        JLabel label = new JLabel("good");
+        panel.add(label);
+        frame.add(panel);
+        //frame
+        frame.setPreferredSize(new Dimension(400, 200));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+
     }
 }
