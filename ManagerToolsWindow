@@ -26,8 +26,23 @@ public class ManagerToolsWindow{
         createTitledBorder(employeeListBorder, employeeListTitle);
         employeeListPanel.setBorder(employeeListTitleBorder);
 
+        //list of shifts
+        JPanel shiftListPanel = new JPanel();
+        String test2[] = {"10/2/22 10:00pm - 3:31am"};//WE NEED THE LIST OF ACTUAL EMPLOYEES FROM THE DATABASE HERE
+        JList testList2 = new JList(test);
+        JScrollPane shiftScrollPane = new JScrollPane(testList);
+        shiftListPanel.add(employeeScrollPane);
+        String shiftListTitle = ("Shifts");
+        Border shiftListBorder = BorderFactory.createEtchedBorder();
+        Border shiftListTitleBorder = BorderFactory.
+        createTitledBorder(shiftListBorder, shiftListTitle);
+        shiftListPanel.setBorder(shiftListTitleBorder);
+
+        //enable and disable employee buttons
+
         //add to panel
         mainPanel.add(employeeListPanel, BorderLayout.WEST);
+        mainPanel.add(shiftListPanel, BorderLayout.CENTER);
         
         //frame
         frame.add(mainPanel);
