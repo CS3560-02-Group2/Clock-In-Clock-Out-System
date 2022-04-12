@@ -1,3 +1,4 @@
+
 //Obj Oriented Design Group Project 2022
 //Manager tools window
 
@@ -6,19 +7,31 @@ import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class ManagerWindow{
+public class ManagerToolsWindow{
 
     static void createAndShowGUI(){
         JFrame frame = new JFrame("Manager Tools");
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
 
-        JPanel panel = new JPanel();
+        //list of employees
+        JPanel employeeListPanel = new JPanel();
+        String test[] = {"Hello Obama"};//WE NEED THE LIST OF ACTUAL EMPLOYEES FROM THE DATABASE HERE
+        JList testList = new JList(test);
+        JScrollPane employeeScrollPane = new JScrollPane(testList);
+        employeeListPanel.add(employeeScrollPane);
+        String employeeListTitle = ("Employees");
+        Border employeeListBorder = BorderFactory.createEtchedBorder();
+        Border employeeListTitleBorder = BorderFactory.
+        createTitledBorder(employeeListBorder, employeeListTitle);
+        employeeListPanel.setBorder(employeeListTitleBorder);
 
-        JLabel label = new JLabel("good");
-        panel.add(label);
-        frame.add(panel);
+        //add to panel
+        mainPanel.add(employeeListPanel, BorderLayout.WEST);
+        
         //frame
-        frame.setPreferredSize(new Dimension(400, 200));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(mainPanel);
+        frame.setPreferredSize(new Dimension(500, 200));
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
