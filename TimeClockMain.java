@@ -9,9 +9,42 @@ import java.awt.event.*;
 public class TimeClockMain{
 
     private static void createAndShowGUI(){
+        JFrame frame = new JFrame("Time Clock");
         JPanel mainPanel = new JPanel();
         GridLayout mainGridLayout = new GridLayout(3,3);
         mainPanel.setLayout(mainGridLayout);
+
+        //Status String
+        JLabel userStatusLabel = new JLabel("Currently Signed Out");
+        userStatusLabel.setHorizontalAlignment(JLabel.CENTER);
+
+        //Login Button
+        JButton loginBtn = new JButton("Login");
+        loginBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+            }
+        });
+
+        //Logout Button
+        JButton logoutBtn = new JButton("Log Out");
+        logoutBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+            }
+        });
+
+        //password field
+        JPasswordField userPassField = new JPasswordField(9);
+        userPassField.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+            }
+        });
+        JPanel userPassFieldPanel = new JPanel();
+        String userPassFieldTitle = ("Enter Employee ID");
+        Border userPassFieldBorder = BorderFactory.createEtchedBorder();
+        Border userPassFieldTitleBorder = BorderFactory.
+        createTitledBorder(userPassFieldBorder, userPassFieldTitle);
+        userPassFieldPanel.setBorder(userPassFieldTitleBorder);
+        userPassFieldPanel.add(userPassField);
 
         //JMenu Bar
         JMenuBar jmb = new JMenuBar();
@@ -29,8 +62,9 @@ public class TimeClockMain{
         JMenuItem jmiOpenManagerWindow = new JMenuItem("Open Manager Window");
         jmManagerTools.add(jmiOpenManagerWindow);
         jmiOpenManagerWindow.setEnabled(false);
-        jmManagerTools.addActionListener(new ActionListener(){
+        jmiOpenManagerWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                ManagerWindow.createAndShowGUI();
             }
         });
 
@@ -60,38 +94,6 @@ public class TimeClockMain{
         jmb.add(jmTimeClock);
         jmb.add(jmManagerTools);
         jmb.add(jmMore);
-
-        //Login Button
-        JButton loginBtn = new JButton("Login");
-        loginBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-            }
-        });
-
-        //Logout Button
-        JButton logoutBtn = new JButton("Log Out");
-        logoutBtn.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-            }
-        });
-
-        //Status String
-        JLabel userStatusLabel = new JLabel("Currently Signed Out");
-        userStatusLabel.setHorizontalAlignment(JLabel.CENTER);
-
-        //password field
-        JPasswordField userPassField = new JPasswordField(9);
-        userPassField.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-            }
-        });
-        JPanel userPassFieldPanel = new JPanel();
-        String userPassFieldTitle = ("Enter Employee ID");
-        Border userPassFieldBorder = BorderFactory.createEtchedBorder();
-        Border userPassFieldTitleBorder = BorderFactory.
-        createTitledBorder(userPassFieldBorder, userPassFieldTitle);
-        userPassFieldPanel.setBorder(userPassFieldTitleBorder);
-        userPassFieldPanel.add(userPassField);
         
         //Add items to frame
         mainPanel.add(userStatusLabel);
@@ -100,7 +102,6 @@ public class TimeClockMain{
         mainPanel.add(logoutBtn);
 
         //frame
-        JFrame frame = new JFrame("Time Clock");
         frame.setJMenuBar(jmb);
         frame.setPreferredSize(new Dimension(400, 200));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
