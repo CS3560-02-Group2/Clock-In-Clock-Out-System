@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
-
 public class TimeClockMain{
 
     private static void createAndShowGUI(){
@@ -23,6 +22,8 @@ public class TimeClockMain{
         JButton loginBtn = new JButton("Login");
         loginBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                NewJFrame jf1 = new NewJFrame();
+                jf1.show();
             }
         });
 
