@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 //package com.mycompany.employeewindow;
+import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 /**
@@ -154,6 +158,8 @@ public class NewJFrame extends javax.swing.JFrame {
         beginShift.minute=gc.get(Calendar.MINUTE);
         beginShift.hour=gc.get(Calendar.HOUR);
         showTime.setText((beginShift.month+1)+"/"+beginShift.day+"/"+beginShift.year+" "+(beginShift.hour+12)+":"+beginShift.minute+":"+beginShift.second);
+        
+    
     }//GEN-LAST:event_beginShiftButtonActionPerformed
 
     private void endShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endShiftButtonActionPerformed
@@ -197,6 +203,19 @@ public class NewJFrame extends javax.swing.JFrame {
                 new NewJFrame().setVisible(true);
             }
         });
+
+        // Test connection to a database
+        /*try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee","root","****");
+            Statement statement = (Statement) connection.createStatement();
+            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery("select * from employeeinfo");
+            while (resultSet.next()){
+                System.out.println(resultSet.getString("fullName"));
+            }
+        } catch (Exception e){
+                e.printStackTrace();
+            }*/
+            
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
