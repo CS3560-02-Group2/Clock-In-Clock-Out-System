@@ -4,7 +4,7 @@ CREATE TABLE employee (
     emailAddress VARCHAR(40),
     address VARCHAR(40),
     phoneNumber INT,
-    position INT
+    position TINYINT
 );
 
 CREATE TABLE timeLog (
