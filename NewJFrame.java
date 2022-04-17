@@ -7,6 +7,7 @@ import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 /**
@@ -203,18 +204,26 @@ public class NewJFrame extends javax.swing.JFrame {
                 new NewJFrame().setVisible(true);
             }
         });
+  
+        //String url = "jdbc:mysql://localhost:3306/employee";
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
 
-        // Test connection to a database
-        /*try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/employee","root","****");
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
             Statement statement = (Statement) connection.createStatement();
-            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery("select * from employeeinfo");
+            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery("insert into employeeInfo(fullName) values('Karen Pia')");
+                //"insert into timepunchinfo(id, dateInfo, clockIn, beginBreak, endBreak, clockOut)" + "values('1', '2022-04-16','12:00:00', '17:00:00', '17:30:00','20:00:00')"
+                
             while (resultSet.next()){
                 System.out.println(resultSet.getString("fullName"));
             }
-        } catch (Exception e){
-                e.printStackTrace();
-            }*/
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
             
     }
 
