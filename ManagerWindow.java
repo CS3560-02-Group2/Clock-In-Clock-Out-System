@@ -9,6 +9,8 @@ import java.awt.event.*;
 public class ManagerWindow{
 
     private static void createAndShowGUI(){
+        JFrame frame = new JFrame("Manager Window");
+        JPanel mainPanel = new JPanel();
         //Gui stuff here
         //buttons to clock in, out, and go on break
         //extra button to access manager tools window, should auto close for all buttons after
