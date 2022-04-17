@@ -167,6 +167,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
         beginShift.minute=gc.get(Calendar.MINUTE);
         beginShift.hour=gc.get(Calendar.HOUR);
         showTime.setText((beginShift.month+1)+"/"+beginShift.day+"/"+beginShift.year+" "+beginShift.hour+":"+beginShift.minute+":"+beginShift.second);
+        getFromDatabase.addBeginShift(beginShift.year, beginShift.month, beginShift.day, beginShift.hour, beginShift.minute, beginShift.second);
     }                                                
 
     private void endShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
