@@ -22,7 +22,7 @@ public class TimeClockMain{
         JButton loginBtn = new JButton("Login");
         loginBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                NewJFrame jf1 = new NewJFrame();
+                EmployeeWindow jf1 = new EmployeeWindow();
                 jf1.show();
             }
         });
