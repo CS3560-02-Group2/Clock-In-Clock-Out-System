@@ -3,23 +3,53 @@
 //objects or other types after testing further in development
 //all changes will call the saveToLog method
 
+import java.sql.*;
+
 public class SendToDatabase {
 
-    public int createEmployee(String employeeName){
+    private Connection con;
+    private Statement stmt;
+
+    public SendToDatabase(Connection connection) throws SQLException {
+        con = connection;
+        stmt = con.createStatement();
+    }
+
+    public int createEmployee(String employeeName, String emailAddress, String address, String phoneNumber, int position){
         int employeeID = 000000;//placeholder, delete this
         //set employee name to new column in database
         //get and return the employee position in database as
         //six digit employee number
         //set employee to active in the database
+        try {
+            stmt.executeUpdate("INSERT INTO employee VALUES (Null, "
+                                + employeeName + ", "
+                                + emailAddress + ", "
+                                + address + ", "
+                                + phoneNumber + ", "
+                                + position + ")");
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
         return employeeID;
     }
 
     public void editEmployeeName(String newEmployeeName, int employeeID){
         //change name in database
+        try {
+            stmt.executeUpdate("UPDATE employee SET name=" + newEmployeeName + " WHERE empID=" + employeeID);
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
     }
 
-    public void editManagerStatus(boolean isManager){
-        //set manager status to true or false in the database
+    public void editManagerStatus(boolean isManager, int employeeID){
+        //set manager status to 1 (true) or 0 (false) in the database
+        try {
+            stmt.executeUpdate("UPDATE employee SET position=" + isManager + " WHERE empID=" + employeeID);
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
     }
 
     public void addEmployeeHours(String employeeHours, int employeeID){
