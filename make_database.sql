@@ -1,15 +1,15 @@
 CREATE TABLE employee (
-    empID INT PRIMARY KEY,
+    empID BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(40),
     emailAddress VARCHAR(40),
     address VARCHAR(40),
-    phoneNumber INT,
+    phoneNumber VARCHAR(10),
     position TINYINT
 );
 
 CREATE TABLE timeLog (
-    logID INT PRIMARY KEY,
-    empID INT,
+    logID BIGINT AUTO_INCREMENT PRIMARY KEY,
+    empID BIGINT,
     date DATE,
     timeClockedIn DATETIME,
     timeClockedOut DATETIME,
