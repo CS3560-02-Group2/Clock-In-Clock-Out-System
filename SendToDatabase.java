@@ -16,21 +16,26 @@ public class SendToDatabase {
     }
 
     public int createEmployee(String employeeName, String emailAddress, String address, String phoneNumber, int position){
-        int employeeID = 000000;//placeholder, delete this
         //set employee name to new column in database
         //get and return the employee position in database as
         //six digit employee number
         //set employee to active in the database
+        int employeeID = -1;
         try {
-            stmt.executeUpdate("INSERT INTO employee VALUES (Null, "
-                                + employeeName + ", "
-                                + emailAddress + ", "
-                                + address + ", "
-                                + phoneNumber + ", "
-                                + position + ")");
+            stmt.executeUpdate("INSERT INTO employee VALUES (NULL, '"
+                                + employeeName + "', '"
+                                + emailAddress + "', '"
+                                + address + "', '"
+                                + phoneNumber + "', "
+                                + position + ")", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                employeeID = rs.getInt(1);
+            }
         } catch (SQLException e) {
             System.out.println("Could not update data to the database " + e.getMessage());
         }
+        
         return employeeID;
     }
 
