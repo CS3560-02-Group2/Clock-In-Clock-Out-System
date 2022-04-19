@@ -80,7 +80,7 @@ public class ManagerToolsWindowUI extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Begin Shift", "Begin Break", "End Break", "End Shift"
+                "ID", "Date", "Begin Shift", "Begin Break", "End Break", "End Shift"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -156,7 +156,7 @@ public class ManagerToolsWindowUI extends javax.swing.JFrame {
     }                                           
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        System.exit(0);
+        dispose();
     }                                        
 
     /**

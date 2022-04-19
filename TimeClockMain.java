@@ -63,10 +63,13 @@ public class TimeClockMain{
         JMenu jmManagerTools = new JMenu("Manager Tools");
         JMenuItem jmiOpenManagerWindow = new JMenuItem("Open Manager Window");
         jmManagerTools.add(jmiOpenManagerWindow);
-        jmiOpenManagerWindow.setEnabled(false);
+        jmiOpenManagerWindow.setEnabled(true);
         jmiOpenManagerWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                ManagerToolsWindow.createAndShowGUI();
+                ManagerToolsWindowUI jf2 = new ManagerToolsWindowUI();
+                jf2.show();
+                
+                //ManagerToolsWindow.createAndShowGUI();
             }
         });
 
