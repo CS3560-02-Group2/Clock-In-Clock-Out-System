@@ -2,6 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 /**
@@ -160,25 +161,19 @@ public class EmployeeWindow extends javax.swing.JFrame {
 
     private void beginShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-        beginShift.day=gc.get(Calendar.DAY_OF_MONTH);
-        beginShift.month=gc.get(Calendar.MONTH);
-        beginShift.year=gc.get(Calendar.YEAR);
-        beginShift.second=gc.get(Calendar.SECOND);
-        beginShift.minute=gc.get(Calendar.MINUTE);
-        beginShift.hour=gc.get(Calendar.HOUR);
-        showTime.setText((beginShift.month+1)+"/"+beginShift.day+"/"+beginShift.year+" "+beginShift.hour+":"+beginShift.minute+":"+beginShift.second);
-        getFromDatabase.addBeginShift(beginShift.year, beginShift.month, beginShift.day, beginShift.hour, beginShift.minute, beginShift.second);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String currentTime = formatter.format(calendar.getTime());
+        showTime.setText(currentTime);
+        //ADD CURRENTTIME TO THE DATABASE HERE
     }                                                
 
     private void endShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
-        endShift.day=gc.get(Calendar.DAY_OF_MONTH);
-        endShift.month=gc.get(Calendar.MONTH);
-        endShift.year=gc.get(Calendar.YEAR);
-        endShift.second=gc.get(Calendar.SECOND);
-        endShift.minute=gc.get(Calendar.MINUTE);
-        endShift.hour=gc.get(Calendar.HOUR);
-        showTime.setText((endShift.month+1)+"/"+endShift.day+"/"+endShift.year+" "+endShift.hour+":"+endShift.minute+":"+endShift.second);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String currentTime = formatter.format(calendar.getTime());
+        showTime.setText(currentTime);
+        //ADD CURRENTTIME TO THE DATABASE HERE
     }                                              
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
@@ -188,24 +183,20 @@ public class EmployeeWindow extends javax.swing.JFrame {
 
     private void beginBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         // TODO add your handling code here:
-        beginBreak.day=gc.get(Calendar.DAY_OF_MONTH);
-        beginBreak.month=gc.get(Calendar.MONTH);
-        beginBreak.year=gc.get(Calendar.YEAR);
-        beginBreak.second=gc.get(Calendar.SECOND);
-        beginBreak.minute=gc.get(Calendar.MINUTE);
-        beginBreak.hour=gc.get(Calendar.HOUR);
-        showTime.setText((beginBreak.month+1)+"/"+beginBreak.day+"/"+beginBreak.year+" "+beginBreak.hour+":"+beginBreak.minute+":"+beginBreak.second);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String currentTime = formatter.format(calendar.getTime());
+        showTime.setText(currentTime);
+        //ADD CURRENTTIME TO THE DATABASE HERE
     }                                                
 
     private void endBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
         // TODO add your handling code here:
-        endBreak.day=gc.get(Calendar.DAY_OF_MONTH);
-        endBreak.month=gc.get(Calendar.MONTH);
-        endBreak.year=gc.get(Calendar.YEAR);
-        endBreak.second=gc.get(Calendar.SECOND);
-        endBreak.minute=gc.get(Calendar.MINUTE);
-        endBreak.hour=gc.get(Calendar.HOUR);
-        showTime.setText((endBreak.month+1)+"/"+endBreak.day+"/"+endBreak.year+" "+endBreak.hour+":"+endBreak.minute+":"+endBreak.second);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String currentTime = formatter.format(calendar.getTime());
+        showTime.setText(currentTime);
+        //ADD CURRENTTIME TO THE DATABASE HERE
     }                                              
  
     /**
