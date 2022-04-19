@@ -1,4 +1,6 @@
 
+//This window will be displayed after selecting an employee in the table from ManagerTools
+//upon selecting a shift for the employee you will be able to edit the date and time
 import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
