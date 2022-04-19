@@ -33,6 +33,9 @@ public class TimeClockMain{
         logoutBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 userStatusLabel.setText("Currently Signed Out");
+                //logout popup
+                JOptionPane.showMessageDialog(frame, "You have been successfully logged out",
+                                              "Account Status", JOptionPane.WARNING_MESSAGE);
             }
         });
 
