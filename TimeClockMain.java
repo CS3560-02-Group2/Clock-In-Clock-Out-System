@@ -24,6 +24,7 @@ public class TimeClockMain{
             public void actionPerformed(ActionEvent e){
                 EmployeeWindow jf1 = new EmployeeWindow();
                 jf1.show();
+                userStatusLabel.setText("Currently Logged In");
             }
         });
 
@@ -31,6 +32,7 @@ public class TimeClockMain{
         JButton logoutBtn = new JButton("Log Out");
         logoutBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                userStatusLabel.setText("Currently Signed Out");
             }
         });
 
@@ -54,9 +56,11 @@ public class TimeClockMain{
         JMenu jmTimeClock = new JMenu("Time Clock");
         JMenuItem jmiOpenShiftWindow = new JMenuItem("Open Shift Window");
         jmTimeClock.add(jmiOpenShiftWindow);
-        jmiOpenShiftWindow.setEnabled(false);
+        //jmiOpenShiftWindow.setEnabled(false);
         jmiOpenShiftWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                EmployeeWindow jf1 = new EmployeeWindow();
+                jf1.show();
             }
         });
 
