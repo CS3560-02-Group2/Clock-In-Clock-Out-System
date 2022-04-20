@@ -5,6 +5,52 @@ import java.time.LocalTime;
 
 public class getFromDatabase {
     
+    /*
+    // Try to create a class for just connecting Data Base to avoid repetition in each code
+    public static void connectToDatabase(){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
+    }
+*/
+    public static void addBeginBreak(String beginBreak){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+            String sql = String.format("insert into employeeinfo(fullName, position) values({0}, {1})", fullName, position);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            statement.close();
+            connection.close();
+            /*Statement statement = (Statement) connection.createStatement();
+            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery( 
+                //"insert into timepunchinfo(id, dateInfo, clockIn, beginBreak, endBreak, clockOut)" + "values('1', '2022-04-14','12:00:00', '17:00:00', '17:30:00','20:00:00')"
+                "select * from employeeinfo"
+                );
+            while (resultSet.next()){
+                System.out.println(resultSet.getString("fullName"));
+            }*/
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
+    }
+
     public static void addEmp(String fullName, int position){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";

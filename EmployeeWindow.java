@@ -9,17 +9,17 @@ import java.util.GregorianCalendar;
  *
  * @author nguyen
  */
-class timeAndDate {
+/*class timeAndDate {
     int day, month, year;
     int second, minute,hour;
-}
+}*/
 public class EmployeeWindow extends javax.swing.JFrame {
 
     // Initialize variables
-    timeAndDate beginShift = new timeAndDate();
-    timeAndDate beginBreak = new timeAndDate();
-    timeAndDate endBreak = new timeAndDate();
-    timeAndDate endShift = new timeAndDate();
+    //timeAndDate beginShift = new timeAndDate();
+    //timeAndDate beginBreak = new timeAndDate();
+    //timeAndDate endBreak = new timeAndDate();
+    //timeAndDate endShift = new timeAndDate();
     //timeAndDate[] tAd = {beginShift, beginBreak, endBreak, endShift};
     GregorianCalendar gc = new GregorianCalendar();
     /**
@@ -187,6 +187,7 @@ public class EmployeeWindow extends javax.swing.JFrame {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         String currentTime = formatter.format(calendar.getTime());
         showTime.setText(currentTime);
+        
         //ADD CURRENTTIME TO THE DATABASE HERE
     }                                                
 
