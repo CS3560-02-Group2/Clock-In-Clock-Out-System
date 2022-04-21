@@ -3,8 +3,9 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.swing.text.Position;
+
 public class getFromDatabase {
-    
     /*
     // Try to create a class for just connecting Data Base to avoid repetition in each code
     public static void connectToDatabase(){
@@ -20,7 +21,31 @@ public class getFromDatabase {
             //e.printStackTrace();
             }
     }
-*/
+    */
+
+    public static void addBeginShift(int id, String currentTime){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
+            String sql = String.format("UPDATE timepunchinfo SET beginBreak='%s' WHERE id='%d';", currentTime, id);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
+    }
+
     public static void addBeginBreak(String currentTime){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
@@ -74,51 +99,41 @@ public class getFromDatabase {
             }
     }
 
-    public static void addBeginShift(int year, int month, int day, int hour, int minute, int second){
+    
+    public static int confirmLogin(int inputID){
+        //check input employee ID, if it exists check if it is active
+        //if it is active return the employee name/ display the employee window
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
         String password = "password";
-
+        int id = 0;
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
+            System.out.println("Database connected! within confirmLogin");
+            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
+            String sql = String.format("SELECT * FROM employeeinfo WHERE id= %d;",inputID);
+            // create the java statement
+            Statement statement = connection.createStatement();
+            // execute the query, and get a java resultset
+            ResultSet rs = statement.executeQuery(sql);
             
-            LocalDate date = LocalDate.parse(year+"-"+(month+1)+"-"+day);
-            LocalTime time = LocalTime.parse(hour+":"+minute+":"+second);
-            String sql = String.format("insert into timepunchinfo(id, dateInfo, clockIn) values({0}, {1}, {2})", 2, date, time);
-
-            /*String date = String.format("%d-%d-%d",year, month, day);
-            String time = String.format("%d:%d:%d",hour, minute, second);
-            String sql = String.format("insert into timepunchinfo(id, dateInfo, clockIn) values({0}, {1}, {2})", 2, date, time);*/
-            
-            /*String date = "8/29/2011 11:16:12 AM";
-            String[] parts = date.split(" ");
-            System.out.println("Date: " + parts[0]);
-            System.out.println("Time: " + parts[1] + " " + parts[2]);*/
-
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int rows = statement.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Database Updated");
+            // iterate through the java resultset
+            while (rs.next())
+            {
+                id = rs.getInt("id");
+                String fullName = rs.getString("fullName");
+                int position = rs.getInt("position");
+                
+                // print the results
+                System.out.format("%s, %s, %s\n", id, fullName, position);
             }
             statement.close();
             connection.close();
-            /*Statement statement = (Statement) connection.createStatement();
-            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery( 
-                //"insert into timepunchinfo(id, dateInfo, clockIn, beginBreak, endBreak, clockOut)" + "values('1', '2022-04-14','12:00:00', '17:00:00', '17:30:00','20:00:00')"
-                "select * from employeeinfo"
-                );
-            while (resultSet.next()){
-                System.out.println(resultSet.getString("fullName"));
-            }*/
         } catch (SQLException e){
             throw new IllegalStateException("Cannot connect the database!", e);    
             //e.printStackTrace();
             }
-    }
-    public String confirmLogin(int inputID){
-        //check input employee ID, if it exists check if it is active
-        //if it is active return the employee name/ display the employee window
+        return id;   
     }
 
     public List getEmployees(){
