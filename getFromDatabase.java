@@ -184,8 +184,25 @@ public class getFromDatabase {
         return id;   
     }
 
-    public List getEmployees(){
+    public static List<List<String>> getEmployees(){
         //get a list of all employees names/IDs and return them, for use in the manager window
+        String url = "jdbc:mysql://127.0.0.1:3306/test";
+        String username = "root";
+        String password = "root";
+        List<List<String>> employees = new ArrayList<>();
+        
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id, fullName FROM employee");
+            while (rs.next()) {
+                employees.add(List.of(rs.getString("id"), rs.getString("fullName")));
+            }
+        } catch (SQLException e) {
+            throw new IllegalStateException("Cannot connect the database!", e);
+        }
+        return employees;
     }
 
     public List getAllHours(int employeeID){
