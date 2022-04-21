@@ -109,7 +109,7 @@ public class getFromDatabase {
         int id = 0;
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected! within confirmLogin");
+            System.out.println("Database connected!");
             //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
             String sql = String.format("SELECT * FROM employeeinfo WHERE id= %d;",inputID);
             // create the java statement
