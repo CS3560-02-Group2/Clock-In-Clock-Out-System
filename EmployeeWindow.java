@@ -5,6 +5,8 @@
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Date;
+import java.sql.*;
 /**
  *
  * @author nguyen
@@ -182,13 +184,36 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }                                            
 
     private void beginBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTime = formatter.format(calendar.getTime());
+        String justTheTime = timeFormat.format(calendar.getTime());
         showTime.setText(currentTime);
-        
-        //ADD CURRENTTIME TO THE DATABASE HERE
+        getFromDatabase.addBeginBreak(justTheTime);
+        /*
+        // Direct Code into button action to see whether the function call is invalid or the code --> The code was invalid
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+
+        try {
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
+            String sql = String.format("UPDATE timepunchinfo SET beginBreak = %s WHERE id=2;", justTheTime);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
+        */
     }                                                
 
     private void endBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               

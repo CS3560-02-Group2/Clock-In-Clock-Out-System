@@ -21,7 +21,7 @@ public class getFromDatabase {
             }
     }
 */
-    public static void addBeginBreak(String beginBreak){
+    public static void addBeginBreak(String currentTime){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
         String password = "password";
@@ -29,7 +29,8 @@ public class getFromDatabase {
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Database connected!");
-            String sql = String.format("insert into employeeinfo(fullName, position) values({0}, {1})", fullName, position);
+            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
+            String sql = String.format("UPDATE timepunchinfo SET beginBreak='%s' WHERE id=2;", currentTime);
             PreparedStatement statement = connection.prepareStatement(sql);
             int rows = statement.executeUpdate();
             if (rows > 0) {
@@ -37,14 +38,6 @@ public class getFromDatabase {
             }
             statement.close();
             connection.close();
-            /*Statement statement = (Statement) connection.createStatement();
-            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery( 
-                //"insert into timepunchinfo(id, dateInfo, clockIn, beginBreak, endBreak, clockOut)" + "values('1', '2022-04-14','12:00:00', '17:00:00', '17:30:00','20:00:00')"
-                "select * from employeeinfo"
-                );
-            while (resultSet.next()){
-                System.out.println(resultSet.getString("fullName"));
-            }*/
         } catch (SQLException e){
             throw new IllegalStateException("Cannot connect the database!", e);    
             //e.printStackTrace();
