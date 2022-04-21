@@ -23,16 +23,16 @@ public class getFromDatabase {
     }
     */
 
-    public static void addBeginShift(int id, String currentTime){
+    public static void addBeginShift(String currentDate, String currentTime){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
         String password = "password";
 
         try {
+            int empID = TimeClockMain.tempID;
             Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Database connected!");
-            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
-            String sql = String.format("UPDATE timepunchinfo SET beginBreak='%s' WHERE id='%d';", currentTime, id);
+            String sql = String.format("INSERT INTO timepunchinfo(id, dateInfo, clockIn) values(%d,'%s','%s');", empID, currentDate, currentTime);
             PreparedStatement statement = connection.prepareStatement(sql);
             int rows = statement.executeUpdate();
             if (rows > 0) {
@@ -52,10 +52,11 @@ public class getFromDatabase {
         String password = "password";
 
         try {
+            int empID = TimeClockMain.tempID;
             Connection connection = DriverManager.getConnection(url, username, password);
             System.out.println("Database connected!");
             //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
-            String sql = String.format("UPDATE timepunchinfo SET beginBreak='%s' WHERE id=2;", currentTime);
+            String sql = String.format("UPDATE timepunchinfo SET beginBreak='%s' WHERE id=%d;", currentTime, empID);
             PreparedStatement statement = connection.prepareStatement(sql);
             int rows = statement.executeUpdate();
             if (rows > 0) {
@@ -69,6 +70,53 @@ public class getFromDatabase {
             }
     }
 
+    public static void addEndBreak(String currentTime){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+
+        try {
+            int empID = TimeClockMain.tempID;
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
+            String sql = String.format("UPDATE timepunchinfo SET endBreak='%s' WHERE id=%d;", currentTime, empID);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
+    }
+
+    public static void addEndShift(String currentTime){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+
+        try {
+            int empID = TimeClockMain.tempID;
+            Connection connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Database connected!");
+            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
+            String sql = String.format("UPDATE timepunchinfo SET clockOut='%s' WHERE id=%d;", currentTime, empID);
+            PreparedStatement statement = connection.prepareStatement(sql);
+            int rows = statement.executeUpdate();
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            statement.close();
+            connection.close();
+        } catch (SQLException e){
+            throw new IllegalStateException("Cannot connect the database!", e);    
+            //e.printStackTrace();
+            }
+    }
     public static void addEmp(String fullName, int position){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";

@@ -162,27 +162,17 @@ public class EmployeeWindow extends javax.swing.JFrame {
     }// </editor-fold>                        
 
     private void beginShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
-        // TODO add your handling code here:
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String currentTime = formatter.format(calendar.getTime());
-        showTime.setText(currentTime);
-        //ADD CURRENTTIME TO THE DATABASE HERE
-    }                                                
-
-    private void endShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String currentTime = formatter.format(calendar.getTime());
-        showTime.setText(currentTime);
-        //ADD CURRENTTIME TO THE DATABASE HERE
-    }                                              
-
-    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        // TODO add your handling code here:
-        dispose();
-    }                                            
-
+        SimpleDateFormat dataBaseFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        String currentDate = formatter.format(calendar.getTime());
+        String justTheTime = timeFormat.format(calendar.getTime());
+        String currentDateDataBase = dataBaseFormatter.format(calendar.getTime());
+        showTime.setText(currentDate);
+        getFromDatabase.addBeginShift(currentDateDataBase, justTheTime);
+    }
+    
     private void beginBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
@@ -191,16 +181,33 @@ public class EmployeeWindow extends javax.swing.JFrame {
         String justTheTime = timeFormat.format(calendar.getTime());
         showTime.setText(currentTime);
         getFromDatabase.addBeginBreak(justTheTime);
-    }                                                
+    }  
 
-    private void endBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        // TODO add your handling code here:
+    private void endBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTime = formatter.format(calendar.getTime());
+        String justTheTime = timeFormat.format(calendar.getTime());
         showTime.setText(currentTime);
-        //ADD CURRENTTIME TO THE DATABASE HERE
-    }                                              
+        getFromDatabase.addEndBreak(justTheTime);
+    }  
+
+    private void endShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        String currentTime = formatter.format(calendar.getTime());
+        String justTheTime = timeFormat.format(calendar.getTime());
+        showTime.setText(currentTime);
+        getFromDatabase.addEndShift(justTheTime);
+    }  
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        // TODO add your handling code here:
+        dispose();
+    }                                                                                          
+                                         
  
     /**
      * @param args the command line arguments
