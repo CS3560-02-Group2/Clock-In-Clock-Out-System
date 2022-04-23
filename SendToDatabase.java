@@ -5,33 +5,27 @@
 
 import java.sql.*;
 
+
 public class SendToDatabase {
 
-    private Connection con;
-    private Statement stmt;
-
-    public SendToDatabase(Connection connection) throws SQLException {
-        con = connection;
-        stmt = con.createStatement();
-    }
-
-    public int createEmployee(String employeeName, String emailAddress, String address, String phoneNumber, int position){
-        //set employee name to new column in database
-        //get and return the employee position in database as
-        //six digit employee number
-        //set employee to active in the database
+    public static int createEmployee(String employeeName, String emailAddress, String address, String phoneNumber, int position){
+        //set employee info to new row in database and return employee's ID
         int employeeID = -1;
+        Connection con = setUpConnection();
         try {
+            Statement stmt = con.createStatement();
             stmt.executeUpdate("INSERT INTO employee VALUES (NULL, '"
                                 + employeeName + "', '"
+                                + phoneNumber + "', '"
                                 + emailAddress + "', '"
-                                + address + "', '"
-                                + phoneNumber + "', "
+                                + address + "', "
                                 + position + ")", Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
                 employeeID = rs.getInt(1);
             }
+            stmt.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println("Could not update data to the database " + e.getMessage());
         }
@@ -39,36 +33,122 @@ public class SendToDatabase {
         return employeeID;
     }
 
-    public void editEmployeeName(String newEmployeeName, int employeeID){
+    public static void editEmployeeName(String newEmployeeName, int employeeID){
         //change name in database
+        Connection con = setUpConnection();
         try {
-            stmt.executeUpdate("UPDATE employee SET name=" + newEmployeeName + " WHERE empID=" + employeeID);
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate("UPDATE employee SET name=" + newEmployeeName + " WHERE empID=" + employeeID);
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println("Could not update data to the database " + e.getMessage());
         }
     }
 
-    public void editManagerStatus(boolean isManager, int employeeID){
+    public static void editManagerStatus(boolean isManager, int employeeID){
         //set manager status to 1 (true) or 0 (false) in the database
+        Connection con = setUpConnection();
         try {
-            stmt.executeUpdate("UPDATE employee SET position=" + isManager + " WHERE empID=" + employeeID);
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate("UPDATE employee SET position=" + isManager + " WHERE empID=" + employeeID);
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
         } catch (SQLException e) {
             System.out.println("Could not update data to the database " + e.getMessage());
         }
     }
 
-    public void addEmployeeHours(String employeeHours, int employeeID){
-        //adds the shift into the database for the employee who matches
-        //the ID
+    //adds start of shift into the database for the employee logged in
+    public static void addBeginShift(String currentDate, String currentTime){
+        Connection con = setUpConnection();
+        int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("INSERT INTO shift(empID, date, timeClockedIn) values(%d,'%s','%s')"
+                                            , employeeID, currentDate, currentTime));
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
     }
 
-    public void editEmployeeHours(String newHours, String oldHours, String managerName, int managerID){
-        //get/ copy old hours from database, save it along with manager
-        //name and ID to the log section of the database
-        //find the old hours in database, change it to new hours
+    //adds end of shift into the database for the employee logged in and date provided
+    public static void addEndShift(String currentDate, String currentTime){
+        Connection con = setUpConnection();
+        int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET timeClockedOut='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
     }
 
-    public void saveToLog(String managerName, int managerID, String changesMade){
-        //saves a log of something changed in the database
+    //adds start of break into the database for the employee logged in and date provided
+    public static void addBeginBreak(String currentDate, String currentTime){
+        Connection con = setUpConnection();
+        int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET breakStart='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
+    //adds end of break into the database for the employee logged in and date provided
+    public static void addEndBreak(String currentDate, String currentTime){
+        Connection con = setUpConnection();
+        int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET breakEnd='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+    
+    private static Connection setUpConnection(){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+        Connection connection;
+        
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            throw new IllegalStateException("Cannot connect the database!", e);
+        }
+
+        return connection;
     }
 }

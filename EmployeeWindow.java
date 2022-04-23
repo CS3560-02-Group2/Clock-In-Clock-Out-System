@@ -170,37 +170,43 @@ public class EmployeeWindow extends javax.swing.JFrame {
         String justTheTime = timeFormat.format(calendar.getTime());
         String currentDateDataBase = dataBaseFormatter.format(calendar.getTime());
         showTime.setText(currentDate);
-        getFromDatabase.addBeginShift(currentDateDataBase, justTheTime);
+        SendToDatabase.addBeginShift(currentDateDataBase, justTheTime);
     }
     
     private void beginBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dataBaseFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTime = formatter.format(calendar.getTime());
         String justTheTime = timeFormat.format(calendar.getTime());
+        String currentDateDataBase = dataBaseFormatter.format(calendar.getTime());
         showTime.setText(currentTime);
-        getFromDatabase.addBeginBreak(justTheTime);
+        SendToDatabase.addBeginBreak(currentDateDataBase, justTheTime);
     }  
 
     private void endBreakButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dataBaseFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTime = formatter.format(calendar.getTime());
         String justTheTime = timeFormat.format(calendar.getTime());
+        String currentDateDataBase = dataBaseFormatter.format(calendar.getTime());
         showTime.setText(currentTime);
-        getFromDatabase.addEndBreak(justTheTime);
+        SendToDatabase.addEndBreak(currentDateDataBase, justTheTime);
     }  
 
     private void endShiftButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        SimpleDateFormat dataBaseFormatter = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTime = formatter.format(calendar.getTime());
         String justTheTime = timeFormat.format(calendar.getTime());
+        String currentDateDataBase = dataBaseFormatter.format(calendar.getTime());
         showTime.setText(currentTime);
-        getFromDatabase.addEndShift(justTheTime);
+        SendToDatabase.addEndShift(currentDateDataBase, justTheTime);
     }  
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {                                             
