@@ -62,12 +62,12 @@ public class ConfirmAddedWindow extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
-
+        setLocationRelativeTo(null);
         pack();
     }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
+        dispose();
     }                                        
 
     /**
