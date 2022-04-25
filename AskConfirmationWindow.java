@@ -35,8 +35,21 @@ public class AskConfirmationWindow extends javax.swing.JFrame {
         jLabel1.setText("Add this employee?");
 
         jButton1.setText("Yes");
+        /*jButton1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                //code to add thing to database
+                dispose();
+            }
+        });
+        */
 
         jButton2.setText("No");
+        /*jButton2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                dispose();
+            }
+        });
+        */
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,7 +77,7 @@ public class AskConfirmationWindow extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(18, 18, 18))
         );
-
+        setLocationRelativeTo(null);
         pack();
     }// </editor-fold>                        
 
