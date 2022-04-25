@@ -38,9 +38,9 @@ public class TimeClockMain{
                     System.err.println("Got an exception! ");
                     System.err.println(exception.getMessage());
                 }
-                //System.out.println("We have this in inputID: " + inputID);
+                System.out.println("We have this in inputID: " + inputID);
                 tempID = getFromDatabase.confirmLogin(inputID);
-                //System.out.println("System move past the function call confirmLogin");
+                System.out.println("System move past the function call confirmLogin");
                 //System.out.println("We have this in tempID: " + tempID);
                 if(tempID!=0){
                     EmployeeWindow jf1 = new EmployeeWindow();

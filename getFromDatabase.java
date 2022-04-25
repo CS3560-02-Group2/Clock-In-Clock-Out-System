@@ -6,22 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class getFromDatabase {
-    /*
-    // Try to create a class for just connecting Data Base to avoid repetition in each code
-    public static void connectToDatabase(){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
-
-        try {
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-        } catch (SQLException e){
-            throw new IllegalStateException("Cannot connect the database!", e);    
-            //e.printStackTrace();
-            }
-    }
-    */
     
     public static int confirmLogin(int inputID){
         //check input employee ID, if it exists check if it is active
@@ -29,7 +13,8 @@ public class getFromDatabase {
         int id = 0;
         try {
             Connection connection = setUpConnection();
-            System.out.println("Database connected!");
+            //System.out.println("Database connected!");
+            System.out.println("Database connected inside confirmLogin function");
             //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
             String sql = String.format("SELECT * FROM employee WHERE empID= %d;",inputID);
             // create the java statement
