@@ -7,6 +7,7 @@ import javax.swing.border.*;
 
 import my.managertoolswindow.AskConfirmationWindow;
 import my.managertoolswindow.ConfirmAddedWindow;
+import my.managertoolswindow.UpdateEmployeeWindow;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -118,6 +119,14 @@ public class TimeClockMain{
             public void actionPerformed(ActionEvent e){
                 AskConfirmationWindow jf4 = new AskConfirmationWindow();
                 jf4.show();
+            }
+        });
+        JMenuItem jmiUpdateEmployeeWindowOpen = new JMenuItem("Open Update Employee Window");
+        jmManagerTools.add(jmiUpdateEmployeeWindowOpen);
+        jmiUpdateEmployeeWindowOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                UpdateEmployeeWindow jf5 = new UpdateEmployeeWindow();
+                jf5.show();
             }
         });
 
