@@ -36,7 +36,7 @@ public class UpdateEmployeeWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class UpdateEmployeeWindow extends javax.swing.JFrame {
                 .addComponent(jButton4)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
-
+        setLocationRelativeTo(null);
         pack();
     }// </editor-fold>                        
 
