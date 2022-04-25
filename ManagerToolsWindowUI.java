@@ -101,6 +101,22 @@ public class ManagerToolsWindowUI extends javax.swing.JFrame {
             }
         });
 
+        JButton jButtonEditShift = new JButton();
+        jButtonEditShift.setText("Edit Shifts");
+        jButtonEditShift.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //bruh code
+            }
+        });
+
+        JButton jButtonAddNew = new JButton();
+        jButtonAddNew.setText("Add New Employee");
+        jButtonAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //bruh code
+            }
+        });
+
         jButton3.setText("Report");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
