@@ -2,8 +2,8 @@
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
-import javax.swing.text.Position;
+import java.util.ArrayList;
+import java.util.List;
 
 public class getFromDatabase {
     /*
@@ -22,144 +22,16 @@ public class getFromDatabase {
             }
     }
     */
-
-    public static void addBeginShift(String currentDate, String currentTime){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
-
-        try {
-            int empID = TimeClockMain.tempID;
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-            String sql = String.format("INSERT INTO timepunchinfo(id, dateInfo, clockIn) values(%d,'%s','%s');", empID, currentDate, currentTime);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int rows = statement.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Database Updated");
-            }
-            statement.close();
-            connection.close();
-        } catch (SQLException e){
-            throw new IllegalStateException("Cannot connect the database!", e);    
-            //e.printStackTrace();
-            }
-    }
-
-    public static void addBeginBreak(String currentTime){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
-
-        try {
-            int empID = TimeClockMain.tempID;
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
-            String sql = String.format("UPDATE timepunchinfo SET beginBreak='%s' WHERE id=%d;", currentTime, empID);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int rows = statement.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Database Updated");
-            }
-            statement.close();
-            connection.close();
-        } catch (SQLException e){
-            throw new IllegalStateException("Cannot connect the database!", e);    
-            //e.printStackTrace();
-            }
-    }
-
-    public static void addEndBreak(String currentTime){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
-
-        try {
-            int empID = TimeClockMain.tempID;
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
-            String sql = String.format("UPDATE timepunchinfo SET endBreak='%s' WHERE id=%d;", currentTime, empID);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int rows = statement.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Database Updated");
-            }
-            statement.close();
-            connection.close();
-        } catch (SQLException e){
-            throw new IllegalStateException("Cannot connect the database!", e);    
-            //e.printStackTrace();
-            }
-    }
-
-    public static void addEndShift(String currentTime){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
-
-        try {
-            int empID = TimeClockMain.tempID;
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-            //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
-            String sql = String.format("UPDATE timepunchinfo SET clockOut='%s' WHERE id=%d;", currentTime, empID);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int rows = statement.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Database Updated");
-            }
-            statement.close();
-            connection.close();
-        } catch (SQLException e){
-            throw new IllegalStateException("Cannot connect the database!", e);    
-            //e.printStackTrace();
-            }
-    }
-    public static void addEmp(String fullName, int position){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
-
-        try {
-            Connection connection = DriverManager.getConnection(url, username, password);
-            System.out.println("Database connected!");
-            String sql = String.format("insert into employeeinfo(fullName, position) values({0}, {1})", fullName, position);
-            PreparedStatement statement = connection.prepareStatement(sql);
-            int rows = statement.executeUpdate();
-            if (rows > 0) {
-                System.out.println("Database Updated");
-            }
-            statement.close();
-            connection.close();
-            /*Statement statement = (Statement) connection.createStatement();
-            ResultSet resultSet = ((java.sql.Statement) statement).executeQuery( 
-                //"insert into timepunchinfo(id, dateInfo, clockIn, beginBreak, endBreak, clockOut)" + "values('1', '2022-04-14','12:00:00', '17:00:00', '17:30:00','20:00:00')"
-                "select * from employeeinfo"
-                );
-            while (resultSet.next()){
-                System.out.println(resultSet.getString("fullName"));
-            }*/
-        } catch (SQLException e){
-            throw new IllegalStateException("Cannot connect the database!", e);    
-            //e.printStackTrace();
-            }
-    }
-
     
     public static int confirmLogin(int inputID){
         //check input employee ID, if it exists check if it is active
         //if it is active return the employee name/ display the employee window
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
         int id = 0;
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = setUpConnection();
             System.out.println("Database connected!");
             //String sql = String.format("UPDATE timepunchinfo SET beginBreak = '{0}' WHERE id=2;", currentTime);
-            String sql = String.format("SELECT * FROM employeeinfo WHERE id= %d;",inputID);
+            String sql = String.format("SELECT * FROM employee WHERE empID= %d;",inputID);
             // create the java statement
             Statement statement = connection.createStatement();
             // execute the query, and get a java resultset
@@ -168,7 +40,7 @@ public class getFromDatabase {
             // iterate through the java resultset
             while (rs.next())
             {
-                id = rs.getInt("id");
+                id = rs.getInt("empID");
                 String fullName = rs.getString("fullName");
                 int position = rs.getInt("position");
                 
@@ -185,41 +57,54 @@ public class getFromDatabase {
     }
 
     public static List<List<String>> getEmployees(){
-        //get a list of all employees names/IDs and return them, for use in the manager window
-        String url = "jdbc:mysql://127.0.0.1:3306/test";
-        String username = "root";
-        String password = "root";
+        //returns employee names and ids from data base as a List of Lists consisting of (id, name) pairs
         List<List<String>> employees = new ArrayList<>();
-        
         try {
-            Connection connection = DriverManager.getConnection(url, username, password);
+            Connection connection = setUpConnection();
             System.out.println("Database connected!");
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, fullName FROM employee");
             while (rs.next()) {
                 employees.add(List.of(rs.getString("id"), rs.getString("fullName")));
             }
+            stmt.close();
+            connection.close();
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
         }
         return employees;
     }
 
-    public List getAllHours(int employeeID){
-        //return a list of all shifts for an employee from the database to be edited
-        //in the manager window
-    }
+    // public List getAllHours(int employeeID){
+    //     //return a list of all shifts for an employee from the database to be edited
+    //     //in the manager window
+    // }
 
-    public List getPayPeriodHours(int employeeID, String payPeriod){
-        //Get a list of shifts the employee has worked during the input pay period
-    }
+    // public List getPayPeriodHours(int employeeID, String payPeriod){
+    //     //Get a list of shifts the employee has worked during the input pay period
+    // }
 
-    public boolean getActiveStatus(int employeeID){
-        //checks if an employee is set as active in the database, returns boolean
-    }
+    // public boolean getActiveStatus(int employeeID){
+    //     //checks if an employee is set as active in the database, returns boolean
+    // }
 
-    public list getDataLogs(){
-        //return a list of log entries from the database
+    // public list getDataLogs(){
+    //     //return a list of log entries from the database
+    // }
+
+    private static Connection setUpConnection(){
+        String url = "jdbc:mysql://localhost:3306/employee";
+        String username = "root";
+        String password = "password";
+        Connection connection;
+        
+        try {
+            connection = DriverManager.getConnection(url, username, password);
+        } catch (SQLException e) {
+            throw new IllegalStateException("Cannot connect the database!", e);
+        }
+
+        return connection;
     }
 
 }
