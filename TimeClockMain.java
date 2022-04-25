@@ -4,6 +4,10 @@
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import my.managertoolswindow.AskConfirmationWindow;
+import my.managertoolswindow.ConfirmAddedWindow;
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -100,6 +104,23 @@ public class TimeClockMain{
                 //ManagerToolsWindow.createAndShowGUI();
             }
         });
+        JMenuItem jmiConfirmAddedWindowOpen = new JMenuItem("Open Confirmation Added Window");
+        jmManagerTools.add(jmiConfirmAddedWindowOpen);
+        jmiConfirmAddedWindowOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                ConfirmAddedWindow jf3 = new ConfirmAddedWindow();
+                jf3.show();
+            }
+        });
+        JMenuItem jmiAskConfirmationWindowOpen = new JMenuItem("Open Ask Confirmation Window");
+        jmManagerTools.add(jmiAskConfirmationWindowOpen);
+        jmiAskConfirmationWindowOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                AskConfirmationWindow jf4 = new AskConfirmationWindow();
+                jf4.show();
+            }
+        });
+
 
         JMenu jmMore = new JMenu("More");
         JMenuItem jmiExit = new JMenuItem("Exit");
