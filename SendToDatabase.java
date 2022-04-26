@@ -16,9 +16,6 @@ public class SendToDatabase {
             Statement stmt = con.createStatement();
             stmt.executeUpdate("INSERT INTO employee VALUES (NULL, '"
                                 + employeeName + "', '"
-                                + phoneNumber + "', '"
-                                + emailAddress + "', '"
-                                + address + "', "
                                 + position + ")", Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.getGeneratedKeys();
             if (rs.next()) {
@@ -38,7 +35,7 @@ public class SendToDatabase {
         Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
-            int rows = stmt.executeUpdate("UPDATE employee SET name=" + newEmployeeName + " WHERE empID=" + employeeID);
+            int rows = stmt.executeUpdate("UPDATE employee SET fullName=" + newEmployeeName + " WHERE empID=" + employeeID);
             if (rows > 0) {
                 System.out.println("Database Updated");
             }

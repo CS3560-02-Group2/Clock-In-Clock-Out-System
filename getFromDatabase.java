@@ -48,9 +48,9 @@ public class getFromDatabase {
             Connection connection = setUpConnection();
             System.out.println("Database connected!");
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id, fullName FROM employee");
+            ResultSet rs = stmt.executeQuery("SELECT empID, fullName FROM employee");
             while (rs.next()) {
-                employees.add(List.of(rs.getString("id"), rs.getString("fullName")));
+                employees.add(List.of(rs.getString("empID"), rs.getString("fullName")));
             }
             stmt.close();
             connection.close();
