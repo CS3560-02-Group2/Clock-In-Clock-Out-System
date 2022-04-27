@@ -4,3 +4,5 @@ INSERT INTO employee VALUES
     (NULL, "Some Guy", 0),
     (NULL, "Lena Raine", 0),
     (NULL, "Joe Zeke", 1);
+
+INSERT INTO employee_archv SELECT * FROM employee;

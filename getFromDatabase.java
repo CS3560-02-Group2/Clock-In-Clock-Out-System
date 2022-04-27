@@ -1,7 +1,6 @@
-//This class contains all methods relating to getting data from the database
+//This class contains all methods relating to getting data from the database in static methods
+
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,6 +76,7 @@ public class getFromDatabase {
     //     //return a list of log entries from the database
     // }
 
+    //sets up and returns connection to database
     private static Connection setUpConnection(){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
