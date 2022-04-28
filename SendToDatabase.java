@@ -1,12 +1,15 @@
-//this class will contain all methods to send items to the database
-
 import java.sql.*;
 
-
+/**
+ * Utility class that sends querys to database that 
+ * update, delete from, and insert into it.
+ * Updating and inserting queries are also performed
+ * on the archival tables of the database.
+ */
 public class SendToDatabase {
 
+    //sets employee info to a new row in database and returns employee's ID
     public static int createEmployee(String employeeName, int position){
-        //set employee info to new row in database and return employee's ID
         int employeeID = -1;
         Connection con = setUpConnection();
         try {
@@ -34,8 +37,8 @@ public class SendToDatabase {
         return employeeID;
     }
 
+    //changes name of the specified employee in the database
     public static void editEmployeeName(String newEmployeeName, int employeeID){
-        //change name in database
         Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
@@ -51,8 +54,8 @@ public class SendToDatabase {
         }
     }
 
+    //set manager status to 1 (true) or 0 (false) in the database
     public static void editManagerStatus(boolean isManager, int employeeID){
-        //set manager status to 1 (true) or 0 (false) in the database
         Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
@@ -69,7 +72,7 @@ public class SendToDatabase {
         }
     }
 
-    //adds start of shift into the database for the employee logged in
+    //adds start of shift into the database for the employee logged in and date provided
     public static void addBeginShift(String currentDate, String currentTime){
         Connection con = setUpConnection();
         int employeeID = TimeClockMain.tempID;
@@ -149,6 +152,7 @@ public class SendToDatabase {
         }
     }
 
+    //deletes employee from the database as well as thier time logs
     public static void removeEmployee(int employeeID) {
         Connection con = setUpConnection();
         try {
@@ -164,6 +168,7 @@ public class SendToDatabase {
         }
     }
     
+    //sets up and returns connection to database
     private static Connection setUpConnection(){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";

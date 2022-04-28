@@ -15,6 +15,7 @@ CREATE TABLE shift (
     PRIMARY KEY(empID, date)
 );
 
+-- The following are archival tables
 CREATE TABLE employee_archv (
     empID BIGINT PRIMARY KEY,
     fullName VARCHAR(40),

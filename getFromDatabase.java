@@ -1,14 +1,16 @@
-//This class contains all methods relating to getting data from the database in static methods
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class that sends querys to database that 
+ * select data from it.
+ */
 public class getFromDatabase {
     
+    //check input employee ID, if it exists check if it is active
+    //if it is active return the employee name / display the employee window
     public static int confirmLogin(int inputID){
-        //check input employee ID, if it exists check if it is active
-        //if it is active return the employee name/ display the employee window
         int id = 0;
         try {
             Connection connection = setUpConnection();
@@ -40,8 +42,8 @@ public class getFromDatabase {
         return id;   
     }
 
+    //returns employee names and ids from database as a List of Lists consisting of (id, name) pairs
     public static List<List<String>> getEmployees(){
-        //returns employee names and ids from data base as a List of Lists consisting of (id, name) pairs
         List<List<String>> employees = new ArrayList<>();
         try {
             Connection connection = setUpConnection();
@@ -58,23 +60,6 @@ public class getFromDatabase {
         }
         return employees;
     }
-
-    // public List getAllHours(int employeeID){
-    //     //return a list of all shifts for an employee from the database to be edited
-    //     //in the manager window
-    // }
-
-    // public List getPayPeriodHours(int employeeID, String payPeriod){
-    //     //Get a list of shifts the employee has worked during the input pay period
-    // }
-
-    // public boolean getActiveStatus(int employeeID){
-    //     //checks if an employee is set as active in the database, returns boolean
-    // }
-
-    // public list getDataLogs(){
-    //     //return a list of log entries from the database
-    // }
 
     //sets up and returns connection to database
     private static Connection setUpConnection(){
