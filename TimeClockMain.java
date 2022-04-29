@@ -99,14 +99,14 @@ public class TimeClockMain{
         jmiOpenManagerWindow.setEnabled(true);
         jmiOpenManagerWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                ManagerToolsWindowUI jf2 = new ManagerToolsWindowUI();
-                jf2.show();
+                TaylorMainManagerUI managerWindow = new TaylorMainManagerUI();
+                managerWindow.show();
                 
                 //ManagerToolsWindow.createAndShowGUI();
             }
         });
         JMenuItem jmiConfirmAddedWindowOpen = new JMenuItem("Open Confirmation Added Window");
-        jmManagerTools.add(jmiConfirmAddedWindowOpen);
+        //jmManagerTools.add(jmiConfirmAddedWindowOpen);
         jmiConfirmAddedWindowOpen.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 ConfirmAddedWindow jf3 = new ConfirmAddedWindow();
@@ -114,7 +114,7 @@ public class TimeClockMain{
             }
         });
         JMenuItem jmiAskConfirmationWindowOpen = new JMenuItem("Open Ask Confirmation Window");
-        jmManagerTools.add(jmiAskConfirmationWindowOpen);
+        //jmManagerTools.add(jmiAskConfirmationWindowOpen);
         jmiAskConfirmationWindowOpen.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 AskConfirmationWindow jf4 = new AskConfirmationWindow();
@@ -122,7 +122,7 @@ public class TimeClockMain{
             }
         });
         JMenuItem jmiUpdateEmployeeWindowOpen = new JMenuItem("Open Update Employee Window");
-        jmManagerTools.add(jmiUpdateEmployeeWindowOpen);
+        //jmManagerTools.add(jmiUpdateEmployeeWindowOpen);
         jmiUpdateEmployeeWindowOpen.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 UpdateEmployeeWindow jf5 = new UpdateEmployeeWindow();
