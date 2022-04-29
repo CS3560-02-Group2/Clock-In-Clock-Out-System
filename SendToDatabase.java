@@ -15,7 +15,7 @@ public class SendToDatabase {
         try {
             Statement stmt = con.createStatement();
             stmt.executeUpdate("INSERT INTO employee VALUES (NULL, '"
-                                + employeeName + "', '"
+                                + employeeName + "', "
                                 + position + ")", Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = stmt.getGeneratedKeys();
 
@@ -23,7 +23,7 @@ public class SendToDatabase {
                 employeeID = rs.getInt(1);
                 stmt.executeUpdate("INSERT INTO employee_archv VALUES ("
                                 + employeeID + ", '"
-                                + employeeName + "', '"
+                                + employeeName + "', "
                                 + position + ")", Statement.RETURN_GENERATED_KEYS);
                 System.out.println("Employee Inserted");
             }
@@ -76,6 +76,25 @@ public class SendToDatabase {
     public static void addBeginShift(String currentDate, String currentTime){
         Connection con = setUpConnection();
         int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("INSERT INTO shift(empID, date, timeClockedIn) values(%d,'%s','%s')"
+                                            , employeeID, currentDate, currentTime));
+            if (rows > 0) {
+                stmt.executeUpdate(String.format("INSERT INTO shift_archv(empID, date, timeClockedIn) values(%d,'%s','%s')"
+                                            , employeeID, currentDate, currentTime));
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
+    //adds start of shift into the database for the employee with the id and date provided
+    public static void addBeginShift(int employeeID, String currentDate, String currentTime){
+        Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
             int rows = stmt.executeUpdate(String.format("INSERT INTO shift(empID, date, timeClockedIn) values(%d,'%s','%s')"
