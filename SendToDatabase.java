@@ -42,9 +42,9 @@ public class SendToDatabase {
         Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
-            int rows = stmt.executeUpdate("UPDATE employee SET fullName=" + newEmployeeName + " WHERE empID=" + employeeID);
+            int rows = stmt.executeUpdate("UPDATE employee SET fullName='" + newEmployeeName + "' WHERE empID=" + employeeID);
             if (rows > 0) {
-                stmt.executeUpdate("UPDATE employee_archv SET fullName=" + newEmployeeName + " WHERE empID=" + employeeID);
+                stmt.executeUpdate("UPDATE employee_archv SET fullName='" + newEmployeeName + "' WHERE empID=" + employeeID);
                 System.out.println("Database Updated");
             }
             stmt.close();
