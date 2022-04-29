@@ -42,16 +42,17 @@ public class getFromDatabase {
         return id;   
     }
 
-    //returns employee names and ids from database as a List of Lists consisting of (id, name) pairs
+    //returns employee information from database as a List of Lists consisting of (id, name, position) as strings
     public static List<List<String>> getEmployees(){
         List<List<String>> employees = new ArrayList<>();
         try {
             Connection connection = setUpConnection();
             System.out.println("Database connected!");
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT empID, fullName FROM employee");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM employee");
             while (rs.next()) {
-                employees.add(List.of(rs.getString("empID"), rs.getString("fullName")));
+                employees.add(List.of(rs.getString("empID"), rs.getString("fullName"), 
+                posAsString(rs.getInt("position"))));
             }
             stmt.close();
             connection.close();
@@ -59,6 +60,33 @@ public class getFromDatabase {
             throw new IllegalStateException("Cannot connect the database!", e);
         }
         return employees;
+    }
+
+    //helper function returning the position name (employee, manager) for the
+    //provided position number (0, 1)
+    private static String posAsString(int pos) {
+        return (pos == 0) ? "employee" : "manager";
+    }
+
+    //returns shift information from database as a List of Lists consisting of all columns as strings
+    public static List<List<String>> getShifts() {
+        List<List<String>> shifts = new ArrayList<>();
+        try {
+            Connection connection = setUpConnection();
+            System.out.println("Database connected!");
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM shift");
+            while (rs.next()) {
+                shifts.add(List.of(rs.getString("empID"), rs.getString("date"), 
+                rs.getString("timeClockedIn"), rs.getString("timeClockedOut"),
+                rs.getString("breakStart"), rs.getString("breakEnd")));
+            }
+            stmt.close();
+            connection.close();
+        } catch (SQLException e) {
+            throw new IllegalStateException("Cannot connect the database!", e);
+        }
+        return shifts;
     }
 
     //sets up and returns connection to database
