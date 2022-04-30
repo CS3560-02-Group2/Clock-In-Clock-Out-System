@@ -92,7 +92,7 @@ public class SendToDatabase {
         }
     }
 
-    //adds start of shift into the database for the employee with the id and date provided
+    //adds start of shift into the database for the employee id and date provided
     public static void addBeginShift(int employeeID, String currentDate, String currentTime){
         Connection con = setUpConnection();
         try {
@@ -111,10 +111,48 @@ public class SendToDatabase {
         }
     }
 
+    //edits start of shift into the database for the employee id and date provided
+    public static void editBeginShift(int employeeID, String currentDate, String currentTime){
+        Connection con = setUpConnection();
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET timeClockedIn='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                stmt.executeUpdate(String.format("UPDATE shift_archv SET timeClockedIn='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
     //adds end of shift into the database for the employee logged in and date provided
     public static void addEndShift(String currentDate, String currentTime){
         Connection con = setUpConnection();
         int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET timeClockedOut='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                stmt.executeUpdate(String.format("UPDATE shift_archv SET timeClockedOut='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
+    //adds end of shift into the database for the employee id and date provided
+    public static void addEndShift(int employeeID, String currentDate, String currentTime){
+        Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
             int rows = stmt.executeUpdate(String.format("UPDATE shift SET timeClockedOut='%s' WHERE empID=%d AND date='%s'"
@@ -151,10 +189,48 @@ public class SendToDatabase {
         }
     }
 
+    //adds start of break into the database for the employee id and date provided
+    public static void addBeginBreak(int employeeID, String currentDate, String currentTime){
+        Connection con = setUpConnection();
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET breakStart='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                stmt.executeUpdate(String.format("UPDATE shift_archv SET breakStart='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
     //adds end of break into the database for the employee logged in and date provided
     public static void addEndBreak(String currentDate, String currentTime){
         Connection con = setUpConnection();
         int employeeID = TimeClockMain.tempID;
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("UPDATE shift SET breakEnd='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+            if (rows > 0) {
+                stmt.executeUpdate(String.format("UPDATE shift_archv SET breakEnd='%s' WHERE empID=%d AND date='%s'"
+                                            , currentTime, employeeID, currentDate));
+                System.out.println("Database Updated");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
+    //adds end of break into the database for the employee id and date provided
+    public static void addEndBreak(int employeeID, String currentDate, String currentTime){
+        Connection con = setUpConnection();
         try {
             Statement stmt = con.createStatement();
             int rows = stmt.executeUpdate(String.format("UPDATE shift SET breakEnd='%s' WHERE empID=%d AND date='%s'"
