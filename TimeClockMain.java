@@ -4,11 +4,20 @@
 
 import javax.swing.*;
 import javax.swing.border.*;
+
+import my.managertoolswindow.AskConfirmationWindow;
+import my.managertoolswindow.ConfirmAddedWindow;
+import my.managertoolswindow.UpdateEmployeeWindow;
+
 import java.awt.*;
 import java.awt.event.*;
-public class TimeClockMain{
 
+public class TimeClockMain{
+    static int inputID=0;
+    static int tempID;
     private static void createAndShowGUI(){
+        
+        JPasswordField userPassField = new JPasswordField(9);
         JFrame frame = new JFrame("Time Clock");
         JPanel mainPanel = new JPanel();
         GridLayout mainGridLayout = new GridLayout(3,3);
@@ -22,8 +31,25 @@ public class TimeClockMain{
         JButton loginBtn = new JButton("Login");
         loginBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                NewJFrame jf1 = new NewJFrame();
-                jf1.show();
+                try {
+                    inputID = Integer.parseInt(userPassField.getText());
+                } catch (Exception exception)
+                {
+                    System.err.println("Got an exception! ");
+                    System.err.println(exception.getMessage());
+                }
+                System.out.println("We have this in inputID: " + inputID);
+                tempID = getFromDatabase.confirmLogin(inputID);
+                System.out.println("System move past the function call confirmLogin");
+                //System.out.println("We have this in tempID: " + tempID);
+                if(tempID!=0){
+                    EmployeeWindow jf1 = new EmployeeWindow();
+                    jf1.show();
+                    userStatusLabel.setText("Currently Logged In");
+                } else {
+                    System.out.println("There was an error somewhere!");
+                }   
+                         
             }
         });
 
@@ -31,13 +57,18 @@ public class TimeClockMain{
         JButton logoutBtn = new JButton("Log Out");
         logoutBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                userStatusLabel.setText("Currently Signed Out");
+                //logout popup
+                JOptionPane.showMessageDialog(frame, "You have been successfully logged out",
+                                              "Account Status", JOptionPane.WARNING_MESSAGE);
             }
         });
 
         //password field
-        JPasswordField userPassField = new JPasswordField(9);
+        
         userPassField.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                
             }
         });
         JPanel userPassFieldPanel = new JPanel();
@@ -54,21 +85,51 @@ public class TimeClockMain{
         JMenu jmTimeClock = new JMenu("Time Clock");
         JMenuItem jmiOpenShiftWindow = new JMenuItem("Open Shift Window");
         jmTimeClock.add(jmiOpenShiftWindow);
-        jmiOpenShiftWindow.setEnabled(false);
+        //jmiOpenShiftWindow.setEnabled(false);
         jmiOpenShiftWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
+                EmployeeWindow jf1 = new EmployeeWindow();
+                jf1.show();
             }
         });
 
         JMenu jmManagerTools = new JMenu("Manager Tools");
         JMenuItem jmiOpenManagerWindow = new JMenuItem("Open Manager Window");
         jmManagerTools.add(jmiOpenManagerWindow);
-        jmiOpenManagerWindow.setEnabled(false);
+        jmiOpenManagerWindow.setEnabled(true);
         jmiOpenManagerWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                ManagerToolsWindow.createAndShowGUI();
+                TaylorMainManagerUI managerWindow = new TaylorMainManagerUI();
+                managerWindow.show();
+                
+                //ManagerToolsWindow.createAndShowGUI();
             }
         });
+        JMenuItem jmiConfirmAddedWindowOpen = new JMenuItem("Open Confirmation Added Window");
+        //jmManagerTools.add(jmiConfirmAddedWindowOpen);
+        jmiConfirmAddedWindowOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                ConfirmAddedWindow jf3 = new ConfirmAddedWindow();
+                jf3.show();
+            }
+        });
+        JMenuItem jmiAskConfirmationWindowOpen = new JMenuItem("Open Ask Confirmation Window");
+        //jmManagerTools.add(jmiAskConfirmationWindowOpen);
+        jmiAskConfirmationWindowOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                AskConfirmationWindow jf4 = new AskConfirmationWindow();
+                jf4.show();
+            }
+        });
+        JMenuItem jmiUpdateEmployeeWindowOpen = new JMenuItem("Open Update Employee Window");
+        //jmManagerTools.add(jmiUpdateEmployeeWindowOpen);
+        jmiUpdateEmployeeWindowOpen.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                UpdateEmployeeWindow jf5 = new UpdateEmployeeWindow();
+                jf5.show();
+            }
+        });
+
 
         JMenu jmMore = new JMenu("More");
         JMenuItem jmiExit = new JMenuItem("Exit");
