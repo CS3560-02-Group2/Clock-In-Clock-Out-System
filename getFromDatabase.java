@@ -105,7 +105,7 @@ public class getFromDatabase {
     private static Connection setUpConnection(){
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
-        String password = "password";
+        String password = "kennedy75";
         Connection connection;
         
         try {

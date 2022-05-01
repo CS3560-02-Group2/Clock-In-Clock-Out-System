@@ -7,7 +7,7 @@ public class prototype{
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/employee";
         String username = "root";
-        String password = "password";
+        String password = "kennedy75";
 
         try {
             Calendar calendar = Calendar.getInstance();
