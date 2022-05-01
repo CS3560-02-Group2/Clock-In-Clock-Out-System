@@ -158,6 +158,17 @@ public class TaylorAddShiftWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String beginShift = clockInTextField.getText();
+        String endShift = clockOutTextField.getText();
+        String breakStart = breakStartTextField.getText();
+        String breakEnd = breakEndTextField.getText();
+        String id = idTextField.getText();
+        
+        SendToDatabase.addBeginShift(id, "", beginShift);
+        SendToDatabase.addEndShift(id, "", endShift);
+        SendToDatabase.addBeginBreak(id, "", breakStart);
+        SendToDatabase.addEndBreak(id, "", breakEnd);
+        
         JOptionPane.showMessageDialog(null,
                 "Shift Added",
                 "Server Status",
