@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.sql.*;
 import java.text.*;
-
+//use this file to test connection to your local database
 public class prototype{
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/employee";
