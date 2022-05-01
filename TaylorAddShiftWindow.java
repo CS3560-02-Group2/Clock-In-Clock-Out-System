@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.swing.JOptionPane;
 
 /*
@@ -163,11 +166,23 @@ public class TaylorAddShiftWindow extends javax.swing.JFrame {
         String breakStart = breakStartTextField.getText();
         String breakEnd = breakEndTextField.getText();
         int id = Integer.parseInt(idTextField.getText());
+
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dataBaseFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDateDataBase = dataBaseFormatter.format(calendar.getTime());
         
-        SendToDatabase.addBeginShift(id, "", beginShift);
-        SendToDatabase.addEndShift(id, "", endShift);
-        SendToDatabase.addBeginBreak(id, "", breakStart);
-        SendToDatabase.addEndBreak(id, "", breakEnd);
+        if (!beginShift.equals("")) {
+            SendToDatabase.addBeginShift(id, currentDateDataBase, beginShift);
+            if (!endShift.equals("")) {
+                SendToDatabase.addEndShift(id, currentDateDataBase, endShift);
+            }
+            if (!breakStart.equals("")) {
+                SendToDatabase.addBeginBreak(id, currentDateDataBase, breakStart);
+            }
+            if (!breakEnd.equals("")) {
+                SendToDatabase.addEndBreak(id, currentDateDataBase, breakEnd);
+            }
+        }
         
         JOptionPane.showMessageDialog(null,
                 "Shift Added",

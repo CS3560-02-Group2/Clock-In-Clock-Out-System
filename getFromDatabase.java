@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -83,7 +84,7 @@ public class getFromDatabase {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM shift");
             while (rs.next()) {
-                shifts.add(List.of(rs.getString("empID"), rs.getString("date"), 
+                shifts.add(Arrays.asList(rs.getString("empID"), rs.getString("date"), 
                 rs.getString("timeClockedIn"), rs.getString("timeClockedOut"),
                 rs.getString("breakStart"), rs.getString("breakEnd")));
             }
