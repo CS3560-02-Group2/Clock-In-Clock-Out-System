@@ -1,6 +1,10 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
+        "*.jar",
         "mysql-connector-java-8.0.28.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.project.sourcePaths": [
+        ""
     ]
 }

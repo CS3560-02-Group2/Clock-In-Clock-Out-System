@@ -28,7 +28,7 @@ public class prototype{
             
             // Passing in the value as an int argument to mySQL, maybe syntax is wrong
 
-            String sql = String.format("SELECT * FROM employeeinfo WHERE id=6;");
+            String sql = String.format("SELECT * FROM employee WHERE empID=6;");
 
             //PreparedStatement statement = connection.prepareStatement(sql);
             //int rows = statement.executeUpdate();
@@ -44,7 +44,7 @@ public class prototype{
             // iterate through the java resultset
             while (rs.next())
             {
-                int id = rs.getInt("id");
+                int id = rs.getInt("empID");
                 String fullName = rs.getString("fullName");
                 int position = rs.getInt("position");
                 
