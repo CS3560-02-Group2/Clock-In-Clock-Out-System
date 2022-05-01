@@ -104,15 +104,15 @@ public class getFromDatabase {
 
     //sets up and returns connection to database
     private static Connection setUpConnection(){
-        String url = "jdbc:mysql://localhost:3306/employee";
-        String username = "root";
-        String password = "password";
+        String url = "jdbc:mysql://localhost:3306/employee"; //make sure this is correct url to your local database
+        String username = "root"; //make sure this is correct username to your local database
+        String password = "password"; //make sure this is correct password to your local database
         Connection connection;
         
         try {
             connection = DriverManager.getConnection(url, username, password);
         } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            throw new IllegalStateException("Cannot connect the database!", e); //database connection failed
         }
 
         return connection;
