@@ -66,6 +66,11 @@ public class TaylorMainManagerUI extends javax.swing.JFrame {
             }
         ));
         jScrollPane2.setViewportView(employeeTable);
+        if (employeeTable.getColumnModel().getColumnCount() > 0) {
+            employeeTable.getColumnModel().getColumn(0).setHeaderValue("ID");
+            employeeTable.getColumnModel().getColumn(1).setHeaderValue("Name");
+            employeeTable.getColumnModel().getColumn(2).setHeaderValue("Position");
+        }
 
         jbAddEmployee.setText("Add");
         jbAddEmployee.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +207,15 @@ public class TaylorMainManagerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jbRemoveEmployeeActionPerformed
 
     private void employeeRefreshAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeRefreshAction
-        //bruh
+        String[][] empData = getFromDatabase.getEmployees();
+        
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
+            empData,
+            new String [] {
+                "ID", "Name", "Position"
+            }
+        ));
+        
     }//GEN-LAST:event_employeeRefreshAction
 
     private void jbAddShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAddShiftActionPerformed
@@ -221,7 +234,14 @@ public class TaylorMainManagerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jbRemoveShiftActionPerformed
 
     private void shiftRefreshAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shiftRefreshAction
-        // TODO add your handling code here:
+        String[][] shiftData = getFromDatabase.getShifts();
+        
+        shiftTable.setModel(new javax.swing.table.DefaultTableModel(
+            shiftData,
+            new String [] {
+                "ID", "Clocked In", "Clocked Out", "Break Start", "Break End"
+            }
+        ));
     }//GEN-LAST:event_shiftRefreshAction
 
     /**
