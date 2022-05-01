@@ -162,7 +162,7 @@ public class TaylorEditShiftWindow extends javax.swing.JFrame {
         String endShift = clockOutTextField.getText();
         String breakStart = breakStartTextField.getText();
         String breakEnd = breakEndTextField.getText();
-        String id = idTextField.getText();
+        int id = Integer.parseInt(idTextField.getText());
         
         SendToDatabase.editBeginShift(id, "", beginShift);
         SendToDatabase.addEndShift(id, "", endShift);
