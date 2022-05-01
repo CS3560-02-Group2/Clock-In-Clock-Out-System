@@ -42,8 +42,8 @@ public class getFromDatabase {
         return id;   
     }
 
-    //returns employee information from database as a List of Lists consisting of (id, name, position) as strings
-    public static List<List<String>> getEmployees(){
+    //returns employee information from database as a 2D String array consisting of (id, name, position) as strings
+    public static String[][] getEmployees(){
         List<List<String>> employees = new ArrayList<>();
         try {
             Connection connection = setUpConnection();
@@ -59,7 +59,13 @@ public class getFromDatabase {
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
         }
-        return employees;
+
+        String[][] empArr = new String[employees.size()][];
+        for (int i = 0; i < employees.size(); i++) {
+            empArr[i] = employees.get(i).toArray(new String[employees.get(i).size()]);
+        }
+
+        return empArr;
     }
 
     //helper function returning the position name (employee, manager) for the
@@ -68,8 +74,8 @@ public class getFromDatabase {
         return (pos == 0) ? "employee" : "manager";
     }
 
-    //returns shift information from database as a List of Lists consisting of all columns as strings
-    public static List<List<String>> getShifts() {
+    //returns shift information from database as a 2D String array consisting of all columns as strings
+    public static String[][] getShifts() {
         List<List<String>> shifts = new ArrayList<>();
         try {
             Connection connection = setUpConnection();
@@ -86,7 +92,13 @@ public class getFromDatabase {
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
         }
-        return shifts;
+
+        String[][] shiftArr = new String[shifts.size()][];
+        for (int i = 0; i < shifts.size(); i++) {
+            shiftArr[i] = shifts.get(i).toArray(new String[shifts.get(i).size()]);
+        }
+
+        return shiftArr;
     }
 
     //sets up and returns connection to database

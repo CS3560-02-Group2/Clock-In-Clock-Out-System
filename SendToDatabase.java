@@ -263,6 +263,23 @@ public class SendToDatabase {
         }
     }
     
+    //deletes shift with id employeeID and date currentDate from the database
+    public static void removeShift(int employeeID, String currentDate) {
+        Connection con = setUpConnection();
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(String.format("DELETE FROM shift WHERE empID=%d AND date='%s'"
+                                            , employeeID, currentDate));
+            if (rows > 0) {
+                System.out.println("Shift Removed");
+            }
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Could not update data to the database " + e.getMessage());
+        }
+    }
+
     //sets up and returns connection to database
     private static Connection setUpConnection(){
         String url = "jdbc:mysql://localhost:3306/employee";
