@@ -52,7 +52,7 @@ public class getFromDatabase {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM employee");
             while (rs.next()) {
-                employees.add(List.of(rs.getString("empID"), rs.getString("fullName"), 
+                employees.add(Arrays.asList(rs.getString("empID"), rs.getString("fullName"), 
                 posAsString(rs.getInt("position"))));
             }
             stmt.close();
@@ -85,8 +85,8 @@ public class getFromDatabase {
             ResultSet rs = stmt.executeQuery("SELECT * FROM shift");
             while (rs.next()) {
                 shifts.add(Arrays.asList(rs.getString("empID"), rs.getString("date"), 
-                rs.getString("timeClockedIn"), rs.getString("timeClockedOut"),
-                rs.getString("breakStart"), rs.getString("breakEnd")));
+                rs.getString("timeClockedIn"), rs.getString("breakStart"), rs.getString("breakEnd"),
+                rs.getString("timeClockedOut")));
             }
             stmt.close();
             connection.close();

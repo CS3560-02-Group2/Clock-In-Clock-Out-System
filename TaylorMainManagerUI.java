@@ -43,13 +43,13 @@ public class TaylorMainManagerUI extends javax.swing.JFrame {
 
         shiftTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Clocked In", "Clocked Out", "Break Start", "Break End"
+                "ID", "Date", "Clocked In", "Break Start", "Break End", "Clocked Out"
             }
         ));
         jScrollPane1.setViewportView(shiftTable);
@@ -239,7 +239,7 @@ public class TaylorMainManagerUI extends javax.swing.JFrame {
         shiftTable.setModel(new javax.swing.table.DefaultTableModel(
             shiftData,
             new String [] {
-                "ID", "Clocked In", "Clocked Out", "Break Start", "Break End"
+                "ID", "Date" ,"Clocked In", "Break Start", "Break End", "Clocked Out"
             }
         ));
     }//GEN-LAST:event_shiftRefreshAction
