@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.text.Position;
+
 /**
  * Utility class that sends querys to database that 
  * select data from it.
@@ -11,8 +13,9 @@ public class getFromDatabase {
     
     //check input employee ID, if it exists check if it is active
     //if it is active return the employee name / display the employee window
-    public static int confirmLogin(int inputID){
+    public static int[] confirmLogin(int inputID){
         int id = 0;
+        int position = 0;
         try {
             Connection connection = setUpConnection();
             //System.out.println("Database connected!");
@@ -29,7 +32,7 @@ public class getFromDatabase {
             {
                 id = rs.getInt("empID");
                 String fullName = rs.getString("fullName");
-                int position = rs.getInt("position");
+                position = rs.getInt("position");
                 
                 // print the results
                 System.out.format("%s, %s, %s\n", id, fullName, position);
@@ -40,7 +43,7 @@ public class getFromDatabase {
             throw new IllegalStateException("Cannot connect the database!", e);    
             //e.printStackTrace();
             }
-        return id;   
+        return new int[]{id, position};   
     }
 
     //returns employee information from database as a 2D String array consisting of (id, name, position) as strings

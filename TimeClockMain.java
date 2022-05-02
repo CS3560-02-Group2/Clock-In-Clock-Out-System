@@ -14,7 +14,7 @@ import java.awt.event.*;
 
 public class TimeClockMain{
     static int inputID=0;
-    static int tempID;
+    static int tempID, tempPosition;
     private static void createAndShowGUI(){
         
         JPasswordField userPassField = new JPasswordField(9);
@@ -22,6 +22,10 @@ public class TimeClockMain{
         JPanel mainPanel = new JPanel();
         GridLayout mainGridLayout = new GridLayout(3,3);
         mainPanel.setLayout(mainGridLayout);
+
+        JMenu jmManagerTools = new JMenu("Manager Tools");
+        JMenuItem jmiOpenManagerWindow = new JMenuItem("Open Manager Window");
+        jmManagerTools.add(jmiOpenManagerWindow);
 
         //Status String
         JLabel userStatusLabel = new JLabel("Currently Signed Out");
@@ -39,12 +43,21 @@ public class TimeClockMain{
                     System.err.println(exception.getMessage());
                 }
                 //System.out.println("We have this in inputID: " + inputID);
-                tempID = getFromDatabase.confirmLogin(inputID);
+                int[] tempIDArray = getFromDatabase.confirmLogin(inputID);
+                tempID = tempIDArray[0];
+                tempPosition = tempIDArray[1];
                 //System.out.println("System move past the function call confirmLogin");
                 //System.out.println("We have this in tempID: " + tempID);
                 if(tempID!=0){
                     EmployeeWindow jf1 = new EmployeeWindow();
                     jf1.show();
+                    
+                    if (tempPosition == 0)
+                    {
+                        jmiOpenManagerWindow.setEnabled(false);
+                    } else{
+                        jmiOpenManagerWindow.setEnabled(true);
+                    }
                     userStatusLabel.setText("Currently Logged In");
                 } else {
                     System.out.println("There was an error somewhere!");
@@ -92,11 +105,7 @@ public class TimeClockMain{
                 jf1.show();
             }
         });
-
-        JMenu jmManagerTools = new JMenu("Manager Tools");
-        JMenuItem jmiOpenManagerWindow = new JMenuItem("Open Manager Window");
-        jmManagerTools.add(jmiOpenManagerWindow);
-        jmiOpenManagerWindow.setEnabled(true);
+        jmiOpenManagerWindow.setEnabled(false);
         jmiOpenManagerWindow.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 TaylorMainManagerUI managerWindow = new TaylorMainManagerUI();
